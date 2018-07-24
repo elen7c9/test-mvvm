@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MvvmProject</string>
+    <string name="error_internet_not_available">Интернет не доступен</string>
+    <string name="error_server_not_available">Сервер не доступен</string>
+    <string name="error_server">Серверная ошибка</string>
+    <string name="error">Непредвиденная ошибка</string>
+</resources>
