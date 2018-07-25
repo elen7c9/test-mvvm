@@ -12,6 +12,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RestApi {
 
@@ -26,4 +27,11 @@ public interface RestApi {
 
     @DELETE("data/User/{id}")
     Observable<DeleteResponse> deleteUser(@Path("id") String id);
+
+    @GET("data/User/search")
+    Observable<List<UserResponse>> searchUsers(
+            @Query("name") String name,
+            @Query("surname") String surname,
+            @Query("sortDir") String sortDir,
+            @Query("selectedSortBy") String selectedSortBy);
 }

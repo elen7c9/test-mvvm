@@ -60,6 +60,16 @@ public class UserListViewModel extends BaseViewModel {
                     }
                 });
     }
+
+    public void onSearch() {
+
+//        Search search = new Search(name.get(), surname.get(),
+//                isSortAsc.get(), selectedSortBy);
+//        searchUserUseCase
+//                .search(search)
+//                .subscribe()
+    }
+
 }
 
 

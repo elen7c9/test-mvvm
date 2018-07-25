@@ -3,6 +3,7 @@ package com.dz.elen.data.repositories;
 import com.dz.elen.data.entity.UserResponse;
 import com.dz.elen.data.net.RestService;
 import com.dz.elen.domain.entity.Gender;
+import com.dz.elen.domain.entity.Search;
 import com.dz.elen.domain.entity.User;
 import com.dz.elen.domain.repositories.UserRepository;
 
@@ -57,5 +58,36 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Completable add(User user) {
         return Completable.never();
+    }
+
+    @Override
+    public Observable<List<User>> search(Search search) {
+        return restService
+                .search(search.getName(),
+                        search.getSurname(),
+                        getSortValueByBoolen(search.getSortDir()),
+                        search.getSelectedSortBy())
+                .map(new Function<List<UserResponse>, List<User>>() {
+                    @Override
+                    public List<User> apply(List<UserResponse> userResponses) throws Exception {
+
+                        final List<User> list = new ArrayList<>();
+                        for(UserResponse user: userResponses) {
+                            list.add(new User(user.getFirstname(),
+                                    user.getSurname(), Gender.M,
+                                    user.getImageUrl()));
+                        }
+
+                        return list;
+                    }
+                });
+    }
+
+    private String getSortValueByBoolen(Boolean isSortAcs) {
+        if(isSortAcs) {
+            return "acs";
+        } else {
+            return "desc";
+        }
     }
 }

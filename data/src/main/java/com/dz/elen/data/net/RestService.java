@@ -78,4 +78,13 @@ public class RestService {
                 .deleteUser(id)
                 .compose(errorParserTransformer.<DeleteResponse, HttpError>parseHttpError());
     }
+
+    public Observable<List<UserResponse>> search(String name,
+                                                 String surname,
+                                                 String sortDir,
+                                                 String selectedSortBy) {
+        return restApi
+                .searchUsers(name, surname, sortDir, selectedSortBy)
+                .compose(errorParserTransformer.<List<UserResponse>, HttpError>parseHttpError());
+    }
 }
